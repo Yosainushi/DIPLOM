@@ -1,0 +1,108 @@
+﻿@using  Диплом2.Models
+@model IEnumerable<Letter>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <button class="btn open-form" style=" margin-left: 0;margin-top: 0; ">Новая заявка</button>
+    <div class="form-popup">
+        <div class="container form-wrapper">
+            <button class="btn close-form">Close</button>
+            <form id="my-form"  method="post" asp-controller="Home" asp-action="Send">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="form-title">Введите данные</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Номер заказа</label>
+                        <input type="number" name="number" style="" class="form-control" id="name" required >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="something">Описание</label>
+                        <textarea name="text" class="form-control" id="" required></textarea>
+                    </div>
+                </div>
+                <button type="submit" id="sendticket" class="btn send-form">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        <div class="tickets">
+            <table class="table table-bordered" style="width:100%;">
+
+                <thead class="thead-light">
+                    <tr>
+
+                        <th scope="row" style="text-align:center;">Номер заказа</th>
+                        <th scope="col" style="vertical-align: middle;">Краткое описание</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="ticket" style="width:100%;">
+                            <th scope="row" style="text-align:center; vertical-align:middle; color:@item.Status;  margin:0px;" width:5vw;">
+                                <p style="margin: 0px;  text-shadow: black 0 0 2.5px;"> @item.Theme </p>
+
+                            </th>
+                            <td style="word-wrap:break-word; width:42vw"><p style="width:30vw;word-wrap:break-word; margin-bottom:0px; ">@item.Text </p></td>
+                            <td style="text-align:center;width:5vw; vertical-align:middle; margin-bottom:0px; "> <form method="post" asp-controller="Home" asp-action="Ticket"><input style="display:none" type="text" name="id" value="@item.Theme" /> <input class="btn btn-dark" type="submit" value="Открыть" /></form> </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+        
+    
+}
+else
+{
+    <a id="go" href="/Account/Login">Вход</a>
+    <script>document.getElementById("go").click();</script>
+
+}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+   
+    $(document).ready(function () {
+
+        $('.open-form').click(function () {
+            $('.form-popup').show();
+            });
+        $('.close-form').click(function () {
+            $('.form-popup').hide();
+            });
+
+        $('.reset-form').click(function () {
+            $('.success-message').show();
+            $('#my-form').trigger('reset');
+
+                setTimeout(function () {
+                $('.success-message').hide()
+                    }, 1500);
+            });
+
+        $(document).mouseup(function (e) {
+                var container = $(".form-wrapper");
+                var form = $(".form-popup");
+
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    form.hide();
+                }
+            });
+
+
+        });
+</script>

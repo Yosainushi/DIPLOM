@@ -1,0 +1,24 @@
+﻿@model Диплом2.ViewModels.LoginViewModel
+
+<div class="login-form"><form method="post" asp-controller="Account" asp-action="Login"
+      asp-route-returnUrl="@Model.ReturnUrl">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div>
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label><br />
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div style="display:flex;margin-top: 10px;">
+        <label style="display: inline-block; margin-bottom: .5rem; margin-right: 10px;" asp-for="RememberMe"></label>
+        <input style="box-sizing: border-box; padding: 0; height: 30px; width: 20px;" asp-for="RememberMe" />
+    </div>
+    <div>   <a style="color:Highlight;" id="go" href="/Account/Register">Зарегистрироватья</a></div>
+    <div>
+        <input type="submit" value="Войти" />
+    </div>
+</form></div>

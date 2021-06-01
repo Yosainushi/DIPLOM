@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Диплом2.Models.Chat>
+@{
+    ViewData["Title"] = "Ticket";
+}
+
+
+
+    <div class="panel panel-primary container-ticket" style="width:100%; margin-bottom:30px;">
+        <div class="panel-heading tickettext">
+            <h3 name="message"  class="panel-title">@ViewData["ticketTheme"].ToString()</h3>
+        </div>
+        <div class="panel-body tickettext" style="width:92%; margin-bottom: 0; display:flex;">
+            <p name="id" style="margin: 0; font-size: 21px;margin-bottom: 0;"> @ViewData["ticketText"].ToString() </p>
+            @if (ViewData["isworker"].ToString() == "1")
+            {
+                 <form  method="post" asp-controller="Home" asp-action="InProcess">
+                     <input type="submit" style="width: 40px; border-radius: 30px; margin-left: auto; background-color: yellow;" name="notready" id="notready" value="" />
+                     <input type="text" name="valueNR" value="yellow" style="display:none" />
+                     <input type="text" name="numberT" value="@ViewData["ticketTheme"].ToString()" style="display:none" />
+                 </form>
+                 <form  method="post" asp-controller="Home" asp-action="Ready">
+                     <input type="submit" style="width: 40px; border-radius: 30px; background-color: #00ff43;" name="ready" id="ready" value="" />
+                     <input type="text" name="valueR" value="green" style="display:none" />
+                     <input type="text" name="numberT" value="@ViewData["ticketTheme"].ToString()" style="display:none" />
+                 </form>
+
+                    }
+            </div>
+    </div>
+
+
+
+    <div>
+        <div class="chat" id="chat">
+
+            @foreach (var item in Model)
+            {
+                if (item.IdSender.ToString() == ViewData["userid"].ToString())
+                {
+                    <div class="divkon">
+                        <p class="send" >@item.TextLetter</p>
+                        <p class="time"> @item.Time.ToString().Remove(item.Time.ToString().Length - 3)</p>
+                    </div>
+                }
+                else
+                {
+        <div class="divcon2">
+
+            <p class="receive"> @item.TextLetter</p>
+            <p class="time">@item.Time.ToString().Remove(item.Time.ToString().Length - 3)</p>
+        </div>
+
+                }
+
+            }
+
+        </div>
+        <input id="username" style="display:none" type="text" value="@ViewData["usermail"]">
+        <div id="inputForm" class="inputform" style="display:flex">
+            <input class="form-control" type="text" id="message" />
+                <input type="button" class="buttonimage" id="sendmessage" onclick="document.getElementById('sendImage').click();" />
+                <input type="file" id="sendImage" style="display:none" />
+                <input class="btn btn-dark"  type="button" id="sendBtn" value="Отправить" />
+           
+
+
+        </div>
+    </div>
+
+    <script src="/js/signalr/dist/browser/signalr.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script>
+
+
+        const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/chat")
+            .build();
+        document.getElementById("chat").scrollTop = 9999999;
+        hubConnection.on("Send", function (message, username) {
+            let div = document.createElement("div");
+            let p = document.createElement("p");
+            let time = document.createElement("p");
+            if (username == document.getElementById("username").value) {
+                
+                div.classList.add("divkon");
+                p.classList.add("send");
+               
+            }
+            else {
+                
+                div.style.inlineSize = "max-content";
+                div.style.padding =  "5px";
+                p.classList.add("receive");
+                
+            }
+            p.innerHTML = message;
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            var hours = today.getHours();
+            var minutes = today.getMinutes();
+            time.innerHTML = dd + '.' + mm + '.' + yyyy + ' ' + hours + ':' + minutes;
+            div.appendChild(p);
+            //p.firstChild.style.color = "black";
+            div.appendChild(time);
+            time.classList.add("time");
+            let divchat = document.getElementById("chat");
+            divchat.appendChild(div);
+            document.getElementById("chat").scrollTop = 9999999;
+    });
+        document.getElementById("chat").scrollTop = 9999999;
+
+
+         document.getElementById("sendImage").addEventListener("change", function (e) {
+
+            
+             var objectUrl = window.URL.createObjectURL(document.getElementById('sendImage').files[0]);
+             let namefile = document.getElementById('sendImage').files[0].name;
+             let url = objectUrl;
+             let username = document.getElementById("username").value;
+             let File=
+             let message = "<a href="+url+">"+namefile+"</a>";
+             hubConnection.invoke("Send", message, username, @int.Parse(ViewData["userid"].ToString()),@int.Parse(ViewData["ticketTheme"].ToString()) );
+             document.getElementById("chat").scrollTop = 9999999;
+             document.getElementById("sendImage").value = "";
+
+         });
+
+        document.getElementById("sendBtn").addEventListener("click", function (e) {
+        let message = document.getElementById("message").value;
+        let username = document.getElementById("username").value;
+        hubConnection.invoke("Send", message, username, @int.Parse(ViewData["userid"].ToString()),@int.Parse(ViewData["ticketTheme"].ToString()) );
+        document.getElementById("chat").scrollTop = 9999999;
+
+    });
+        document.getElementById("chat").scrollTop = 9999999;
+        hubConnection.start();
+
+        $(document).ready(function () {
+
+            $('.open-form').click(function () {
+                $('.form-popup').show();
+            });
+            $('.close-form').click(function () {
+                $('.form-popup').hide();
+            });
+
+            $('.reset-form').click(function () {
+                $('.success-message').show();
+                $('#my-form').trigger('reset');
+
+                setTimeout(function () {
+                    $('.success-message').hide()
+                }, 1500);
+            });
+
+            $(document).mouseup(function (e) {
+                var container = $(".form-wrapper");
+                var form = $(".form-popup");
+
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    form.hide();
+                }
+            });
+
+
+        });
+    </script>

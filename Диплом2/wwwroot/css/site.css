@@ -1,0 +1,307 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
+body {
+font-size: 1.4em;
+
+}
+.container-ticket {
+    display: flex;
+    border-radius: 10px;
+    border: 15px solid #ecf0f1;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.ticket{
+    justify-content:space-between;
+}
+.tickettext {
+    margin-right: 10px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 1px rgb(0 0 0 / 50%);
+}
+
+.tickets {
+    height: 70vh;
+    border: solid;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+.divkon {
+    text-align: -webkit-right;
+    padding: 5px;
+}
+.divcon2 {
+    inline-size: max-content;
+    padding: 5px;
+}
+.login-form {
+    background: whitesmoke;
+    height: 70vh;
+    width: 100%;
+}
+.inputform {
+    border-radius: 10px;
+    border: 15px solid #ecf0f1;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    margin-top: 30px;
+}
+.chat {
+    overflow-x: hidden;
+    width: 100%;
+    height: 50vh;
+    margin: 0;
+    border: solid;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 15px solid #ecf0f1;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+a{
+    color: black; 
+}      
+.messageinchatuser {
+    border: #4175a7;
+    background: #81a7ca;
+    border-style: solid;
+    border-radius: 20px;
+    margin: 15px;
+    margin-left: 10vw;
+    margin-right: 0px;
+}
+.messageinchattaker {
+    border: #b7c776;
+    background: #eeffa9;
+    border-style: solid;
+    border-radius: 20px;
+    margin: 15px;
+    margin-left: 0px;
+    margin-right: 10vw;
+}
+.time {
+    text-align: end;
+    margin-right: 3px;
+    font-size: 60%;
+}
+
+.vihod {
+    
+    background-color: transparent;
+    border: none;
+    color: cornflowerblue;
+}
+input[type=button]:active {
+    border-color: rgb(4%, 28%, 20%, 50);
+} 
+.buttonimage {
+    width: 45px;
+    border: aqua;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px rgb(0 0 0 / 50%);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 37px;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/attachment.png);
+}
+.write-link {
+
+    display: inline-block;
+    float: left;
+    width: 20px;
+    height: 42px;
+    content: '';
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/attachment.png');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.mail {
+    font-size: 22px;
+    width: 100%;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px rgb(0 0 0 / 50%);
+}
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+:root {
+    --send-bg: #0B93F6;
+    --send-color: white;
+    --receive-bg: #E5E5EA;
+    --receive-text: black;
+    --page-background: white;
+}
+.textmessage {
+    max-width: 255px;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    line-height: 24px;
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+
+.send {
+    margin-bottom: 0;
+    color: var(--send-color);
+    background: var(--send-bg);
+    align-self: flex-end;
+    width: max-content;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+
+.receive {
+    margin-bottom: 0;
+    background: var(--receive-bg);
+    color: black;
+    align-self: flex-start;
+    width: max-content;
+    border-radius: 16px;
+    padding: 8px;
+}
+
+
+.open-form,
+.reset-form {
+    margin-top: 50px;
+    margin-left: 50px;
+    cursor: pointer;
+    color: white;
+    padding: 10px 25px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 9px;
+    background-color: #1d2124;
+    border-color: #171a1d;
+    font-size: 14px;
+    transition: .3s;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.form-popup,
+.success-message {
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, .5);
+    transition: 10s;
+}
+
+    .form-popup .form-wrapper {
+        top: 2em;
+        max-width: 700px;
+        background: white;
+        padding: 50px;
+        padding-top: 50px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+    }
+
+.form-title {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.close-form {
+    border-radius: 0px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    cursor: pointer;
+    padding: 10px 30px;
+    background-color: #1d2124;
+    border-color: #171a1d;
+    color: #ffffff;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    transition: .3s;
+}
+
+.send-form {
+    cursor: pointer;
+    padding: 10px 30px;
+    background-color: #1d2124;
+    border-color: #171a1d;
+    color: #ffffff;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.form-control:focus {
+    border-color: #83b566;
+    box-shadow: 0 0 0 0.2rem rgba(181, 181, 181, 1);
+    
+}
+
+.btn:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
+}
+
+.success-message {
+    text-align: center;
+}
+
+    .success-message h1 {
+        color: #ffffff;
+        margin-top: 3em;
+    }

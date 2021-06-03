@@ -28,10 +28,13 @@
                             <a class="nav-link text-dark" href="https://elitesoft.by/about-2">О нас</a>
                         </li>
                         <li style="margin-left: auto;">
-                            <form method="post" style="display: flex; align-items:flex-end;" asp-controller="Account" asp-action="Logout">
-                                <p style="margin-top: 0; margin-bottom: 0;padding: .5rem;padding-left: 0;">@User.Identity.Name</p>
-                                <input class="vihod" style="padding: .5rem;" type="submit" value="Выход" />
-                            </form>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <form method="post" style="display: flex; align-items:flex-end;" asp-controller="Account" asp-action="Logout">
+                                    <p style="margin-top: 0; margin-bottom: 0;padding: .5rem;padding-left: 0;">@User.Identity.Name</p>
+                                    <input class="vihod" style="padding: .5rem;" type="submit" value="Выход" />
+                                </form>
+                            }      
                         </li>
                     </ul>
                 </div>

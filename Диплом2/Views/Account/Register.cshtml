@@ -1,23 +1,41 @@
 ﻿@model Диплом2.ViewModels.RegisterViewModel
-<h2>Регистрация нового пользователя</h2>
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body class="login-body">
+
+    <div id="login" >
+        <h3 class="text-center text-white pt-5">Login form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" style="height: 40vh;" class="col-md-12">
+                        <form id="login-form" class="form" method="post" asp-controller="Account" asp-action="Register">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <h3 class="text-center text-info">Login</h3>
+                            <div class="form-group">
+                                <label asp-for="Email" class="text-info">Username:</label><br>
+                                <input asp-for="Email" class="form-control">
+                                <span asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="text-info">Password:</label><br>
+                                <input asp-for="Password" type="password" name="password" id="password" class="form-control">
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PasswordConfirm" class="text-info">Password:</label><br>
+                                <input asp-for="PasswordConfirm"  class="form-control" type="password">
+                                <span asp-validation-for="PasswordConfirm"></span>
+                            </div>
+                            <div class="form-group" style="display:flex;">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                <a style="margin-left:auto;" href="/Account/Login" class="text-info">Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="PasswordConfirm"></label><br />
-        <input asp-for="PasswordConfirm" />
-        <span asp-validation-for="PasswordConfirm"></span>
-    </div>
-    <div>
-        <input type="submit" value="Регистрация" />
-    </div>
-</form>
+</body>

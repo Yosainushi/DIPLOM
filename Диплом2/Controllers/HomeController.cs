@@ -104,7 +104,7 @@ namespace Диплом2.Controllers
 
         public ActionResult Send(string number, string text)
         {
-            if (db.Letter.Where(c=>c.Theme==number).ToList().First()==null)
+            if (db.Letter.FirstOrDefault(c => c.Theme == number) == null || db.Letter.ToList().Count == 0)
             {
                 var a = db.User.ToList().Where(s => s.Email == User.Identity.Name);
                 Letter let = new Letter { Theme = number, Text = text, IdUser = a.First().Id };

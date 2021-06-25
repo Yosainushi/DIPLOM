@@ -119,7 +119,8 @@
              let namefile = document.getElementById('sendImage').files[0].name;
              let url = objectUrl;
              let username = document.getElementById("username").value;
-             let message = "<a href="+url+">"+namefile+"</a>";
+             let cacheName = namefile;
+             let message = "<a href=" + url + " target='_blank'>"+namefile+"</a>";
              hubConnection.invoke("Send", message, username, @int.Parse(ViewData["userid"].ToString()),@int.Parse(ViewData["ticketTheme"].ToString()) );
              document.getElementById("chat").scrollTop = 9999999;
              document.getElementById("sendImage").value = "";

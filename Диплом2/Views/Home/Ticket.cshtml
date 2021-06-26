@@ -87,13 +87,20 @@
                
             }
             else {
-                
-                div.style.inlineSize = "max-content";
-                div.style.padding =  "5px";
+
+                div.classList.add("divkon2");
                 p.classList.add("receive");
                 
             }
-            p.innerHTML = message;
+            let str = message;
+            console.log(str.substr(0, 4));
+            if (str.substr(0, 4) == "http") {
+                p.innerHTML = "<a href=" + str + " target='_blank'> ссылка </a>";
+            }
+            else {
+                p.innerHTML = message;
+            }
+            
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
             var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -131,8 +138,8 @@
         let message = document.getElementById("message").value;
         let username = document.getElementById("username").value;
         hubConnection.invoke("Send", message, username, @int.Parse(ViewData["userid"].ToString()),@int.Parse(ViewData["ticketTheme"].ToString()) );
-        document.getElementById("chat").scrollTop = 9999999;
-
+            document.getElementById("chat").scrollTop = 9999999;
+            document.getElementById("message").value="";
     });
         document.getElementById("chat").scrollTop = 9999999;
         hubConnection.start();

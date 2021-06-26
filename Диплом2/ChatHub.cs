@@ -6,12 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Диплом2.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Диплом2.Controllers;
 
 namespace Диплом2
 {
     public class ChatHub : Hub
     {
-       
         public async Task Send(string message, string username, int idsender, int idtaker)
         {
            

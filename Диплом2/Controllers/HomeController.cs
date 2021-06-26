@@ -101,7 +101,11 @@ namespace Диплом2.Controllers
             }
         }
         
-
+        public void SendSMS(Chat chat)
+        {
+            db.Chat.Add(chat);
+            db.SaveChanges();
+        }
         public ActionResult Send(string number, string text)
         {
             if (db.Letter.FirstOrDefault(c => c.Theme == number) == null || db.Letter.ToList().Count == 0)
@@ -111,7 +115,6 @@ namespace Диплом2.Controllers
                 db.Letter.Add(let);
                 db.SaveChanges();
                 SendCodeAsync(let.Theme.ToString(), let.Text.ToString());
-                
                 return RedirectToAction("Index");
                 //return Content($"{number} - {text}");
             }

@@ -70,14 +70,16 @@ namespace Диплом2
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
+            });
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<ChatHub>("/chat");
-            });
+           
         }
     }
 }

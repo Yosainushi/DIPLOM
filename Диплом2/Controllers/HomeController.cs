@@ -22,6 +22,7 @@ namespace Диплом2.Controllers
         public AppDBContext db;
         public static AppDBContext db1;
         IWebHostEnvironment _appEnvironment;
+        public bool isShow = false;
         public HomeController(ILogger<HomeController> logger, AppDBContext context, IWebHostEnvironment appEnvironment)
         {
             _logger = logger;
@@ -40,13 +41,13 @@ namespace Диплом2.Controllers
                 User u = db.User.FirstOrDefault(u => u.Email == User.Identity.Name);
                 if (u!=null && u.IsWorker==1)
                 {
-                    List<Letter> C = db.Letter.ToList();
+                    List<Letter> C = db.Letter.OrderByDescending(c=>c.Id).ToList();
                     ViewData["das"] = C;
                     return View(C);
                 }
                 else if(u!=null)
                 {
-                    List<Letter> C = db.Letter.Where(c => c.IdUser == u.Id).ToList();
+                    List<Letter> C = db.Letter.Where(c => c.IdUser == u.Id).OrderByDescending(c=>c.Id).ToList();
                     ViewData["das"] = C;
                     return View(C);
                 }
@@ -120,6 +121,7 @@ namespace Диплом2.Controllers
             }
             return RedirectToAction("Index");
         }
+       
         public ActionResult Ready(string numberT, string valueR)
         {
             Letter let = db.Letter.First(l => l.Theme == numberT);
@@ -194,8 +196,8 @@ namespace Диплом2.Controllers
 <body>
 <p> Поступил новый тикет.</p>
                        
-                        <p>Номер заказа <b></b>" + numberTicket + @"</p>
-<p>Текст <b></b>" + textmessage + @"</p>
+                        <p>Номер заказа: <b></b>" + numberTicket + @"</p>
+<p>Текст: <b></b>" + textmessage + @"</p>
 </body>
 </head>
 </html>";
